@@ -4,6 +4,7 @@ import { ClientEntity } from 'src/entities/client.entity'
 import { Repository } from 'typeorm'
 
 import { ClientType } from '../types/client.type'
+import { clientId } from 'src/types/client-id.type'
 
 @Injectable()
 export class ClientService {
@@ -11,8 +12,14 @@ export class ClientService {
 
   public async createClient(clientDto: ClientType) {
     const dbClientInstance = this.clientRepository.create(clientDto)
-    const createdClient = this.clientRepository.save(dbClientInstance)
+    const createdClient = await this.clientRepository.save(dbClientInstance)
 
     return createdClient
+  }
+
+  public async findClientById(id: clientId) {
+    const dbClientInstance = await this.clientRepository.findOne(id)
+
+    return dbClientInstance
   }
 }
