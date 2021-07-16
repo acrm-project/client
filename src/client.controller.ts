@@ -7,13 +7,14 @@ import { IFindClientByIdResponse } from './interfaces/find-client-by-id-response
 import { IClient } from './interfaces/client.interface'
 
 import { clientId } from './types/client-id.type'
+import { ClientType } from './types/client.type'
 
 @Controller('/clients')
 export class ClientController {
   constructor(private clientService: ClientService) {}
 
   @MessagePattern('client_create')
-  public async createClient(createClientDto: IClient) {
+  public async createClient(createClientDto: ClientType) {
     const clientDbInstance: IClient = await this.clientService.createClient(createClientDto)
 
     return {

@@ -1,8 +1,8 @@
 import { HttpStatus } from '@nestjs/common'
-import { ClientType } from 'src/types/client.type'
+import { IClient } from './client.interface'
 
 export interface IFindClientByIdResponse {
-  client?: ClientType
+  client?: IClient
   status: HttpStatus
   error?: string | null
 }
