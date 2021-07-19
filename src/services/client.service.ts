@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { ClientEntity } from 'src/entities/client.entity'
 import { Repository } from 'typeorm'
+
+import { ClientEntity } from 'src/entities/client.entity'
 
 import { ClientType } from '../types/client.type'
 import { clientId } from 'src/types/client-id.type'
@@ -12,9 +13,7 @@ export class ClientService {
 
   public async createClient(clientDto: ClientType) {
     const dbClientInstance = this.clientRepository.create(clientDto)
-    const createdClient = await this.clientRepository.save(dbClientInstance)
-
-    return createdClient
+    return this.clientRepository.save(dbClientInstance)
   }
 
   public async findClientById(id: clientId) {
