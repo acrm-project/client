@@ -1,8 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
-import { ApplicationEntity } from './application.entity'
-
-@Entity()
+@Entity('clients')
 export class ClientEntity {
   @PrimaryGeneratedColumn()
   id: number
@@ -18,7 +16,4 @@ export class ClientEntity {
 
   @Column({ nullable: true, type: 'varchar', length: 60 })
   email?: string
-
-  @OneToMany((type) => ApplicationEntity, (application) => application)
-  applications: ApplicationEntity[]
 }

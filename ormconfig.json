@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "postgres",
   "password": "tilichiki1",
-  "database": "acrm",
+  "database": "acrm_clients",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true
 }
