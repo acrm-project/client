@@ -17,3 +17,9 @@ export class ClientEntity {
   @Column({ nullable: true, type: 'varchar', length: 60 })
   email?: string
 }
+
+/*
+  client interface for public using
+*/
+
+export interface IDbClient extends ClientEntity {}
