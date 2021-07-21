@@ -7,8 +7,6 @@ import { ClientEntity } from 'src/entities/client.entity'
 import { ClientType } from '../types/client.type'
 import { clientId } from 'src/types/client-id.type'
 
-const prepareQuery = (query: string) => query.charAt(0).toUpperCase() + query.slice(1).toLowerCase()
-
 @Injectable()
 export class ClientService {
   constructor(@InjectRepository(ClientEntity) private clientRepository: Repository<ClientEntity>) {}
@@ -24,6 +22,13 @@ export class ClientService {
     return dbClientInstance
   }
 
+  /* 
+    prepare query for query builder
+  */
+  private _prepareQuery(query: string) {
+    return query.charAt(0).toUpperCase() + query.slice(1).toLowerCase()
+  }
+
   public async findClientBySearchQuery(query: string) {
     const result = await getConnection()
       .getRepository(ClientEntity)
@@ -32,7 +37,7 @@ export class ClientService {
         `client.surname = :query OR
          client.name = :query OR
          client.phoneNumber = :query`,
-        { query: prepareQuery(query) },
+        { query: this._prepareQuery(query) },
       )
       .getMany()
 

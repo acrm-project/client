@@ -55,10 +55,10 @@ export class ClientController {
 
     const clientDbResponse = await this.clientService.findClientBySearchQuery(query)
 
-    if (!clientDbResponse) {
+    if (!clientDbResponse.length) {
       findClientBySearchQueryResponse = {
         status: HttpStatus.NOT_FOUND,
-        error: Errors.NO_CLIENT_BY_ID,
+        error: Errors.NO_CLIENTS_BY_QUERY,
       }
 
       return findClientBySearchQueryResponse
